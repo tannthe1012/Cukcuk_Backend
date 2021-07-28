@@ -1,0 +1,15 @@
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\MISA.Infarstructure.csproj.AssemblyReference.cache
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\MISA.Infarstructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\MISA.Infarstructure.AssemblyInfoInputs.cache
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\MISA.Infarstructure.AssemblyInfo.cs
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\MISA.Infarstructure.csproj.CoreCompileInputs.cache
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\net5.0\MISA.Infarstructure.deps.json
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\net5.0\MISA.Infarstructure.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\net5.0\ref\MISA.Infarstructure.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\net5.0\MISA.Infarstructure.pdb
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\MISA.Infarstructure.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\ref\MISA.Infarstructure.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\MISA.Infarstructure.pdb
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\net5.0\MISA.Entity.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\net5.0\MISA.Entity.pdb
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\net5.0\MISA.Infarstructure.csproj.CopyComplete
