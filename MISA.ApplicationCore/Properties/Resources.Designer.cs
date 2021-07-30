@@ -79,6 +79,33 @@ namespace MISA.ApplicationCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bạn đã thêm thành công đối tượng.
+        /// </summary>
+        public static string InsertSuccess {
+            get {
+                return ResourceManager.GetString("InsertSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã phòng ban không được phép để trống.
+        /// </summary>
+        public static string ValidateError_DepartmentCode_Empty {
+            get {
+                return ResourceManager.GetString("ValidateError_DepartmentCode_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã phòng ban đã tồn tại. Mời bạn nhập lại.
+        /// </summary>
+        public static string ValidateError_DepartmentCode_Exist {
+            get {
+                return ResourceManager.GetString("ValidateError_DepartmentCode_Exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mã nhân viên không được phép để trống.
         /// </summary>
         public static string ValidateError_EmployeeCode_Empty {

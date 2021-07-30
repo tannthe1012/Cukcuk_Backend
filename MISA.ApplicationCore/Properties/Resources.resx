@@ -123,6 +123,15 @@
   <data name="Error_Exception" xml:space="preserve">
     <value>Có lỗi xảy ra vui lòng liên hệ với MISA</value>
   </data>
+  <data name="InsertSuccess" xml:space="preserve">
+    <value>Bạn đã thêm thành công đối tượng</value>
+  </data>
+  <data name="ValidateError_DepartmentCode_Empty" xml:space="preserve">
+    <value>Mã phòng ban không được phép để trống</value>
+  </data>
+  <data name="ValidateError_DepartmentCode_Exist" xml:space="preserve">
+    <value>Mã phòng ban đã tồn tại. Mời bạn nhập lại</value>
+  </data>
   <data name="ValidateError_EmployeeCode_Empty" xml:space="preserve">
     <value>Mã nhân viên không được phép để trống</value>
   </data>

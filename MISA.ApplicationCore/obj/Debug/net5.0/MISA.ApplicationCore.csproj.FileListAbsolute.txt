@@ -1,4 +1,3 @@
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.AssemblyReference.cache
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.AssemblyInfoInputs.cache
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.AssemblyInfo.cs
@@ -7,13 +6,9 @@ C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\net5.
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\net5.0\MISA.ApplicationCore.dll
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\net5.0\ref\MISA.ApplicationCore.dll
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\net5.0\MISA.ApplicationCore.pdb
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\net5.0\MISA.Infarstructure.dll
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\net5.0\MISA.Infarstructure.pdb
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.CopyComplete
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.dll
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\ref\MISA.ApplicationCore.dll
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.pdb
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\net5.0\MISA.Entity.dll
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\net5.0\MISA.Entity.pdb
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.Properties.Resources.resources
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.GenerateResource.cache
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.AssemblyReference.cache

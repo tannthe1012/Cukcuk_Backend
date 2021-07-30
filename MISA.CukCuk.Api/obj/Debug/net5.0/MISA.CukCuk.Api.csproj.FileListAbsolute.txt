@@ -29,11 +29,7 @@ C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\obj\Debug\net5.0\MIS
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.genruntimeconfig.cache
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\Dapper.dll
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MySqlConnector.dll
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.Properties.Resources.resources
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.csproj.GenerateResource.cache
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.ApplicationCore.dll
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Infarstructure.dll
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.ApplicationCore.pdb
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Infarstructure.pdb
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Entity.dll
-C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Entity.pdb
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Reponsitory.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Reponsitory.pdb

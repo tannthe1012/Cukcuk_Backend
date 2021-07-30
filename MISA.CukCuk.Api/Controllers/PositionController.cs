@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 using Dapper;
 using MySqlConnector;
 using System.Data;
-using MISA.Entity.Model;
-
+using MISA.ApplicationCore.Entities;
 namespace MISA.CukCuk.Api.Controllers
 {
     [Route("api/v1/Positions")]
@@ -31,10 +30,10 @@ namespace MISA.CukCuk.Api.Controllers
                     "User Id=root;" +
                     "Password= thetan123";
                 IDbConnection dbConnection = new MySqlConnection(connectionString);
-                var sqlCommand = "SELECT * FROM Positions";
+                //var sqlCommand = "SELECT * FROM Positions";
 
                 // Thực hiện lấy dữ liệu với Dapper:
-                var positions = dbConnection.Query<Position>(sqlCommand);
+                var positions = dbConnection.Query<Position>("Proc_GetPositions", commandType: CommandType.StoredProcedure);
                 //trả về kết quả
                 if (positions.Count() > 0)
                     return Ok(positions);
