@@ -9,6 +9,7 @@ namespace MISA.ApplicationCore.Interface
 {
     public interface IEmployeeService: IBaseService<Employee>
     {
-        IEnumerable<Employee> GetEmployeePaging(int limit, int offset);
+        object GetEmployeeFilterPaging(string employeeFilter, Guid? departmentId, Guid? positionId, int pageIndex, int pageSize);
+        public string GetNewEmployeeCode();
     }
 }

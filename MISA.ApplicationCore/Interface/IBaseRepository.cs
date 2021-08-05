@@ -9,12 +9,12 @@ namespace MISA.ApplicationCore.Interface
 {
     public interface IBaseRepository<MISAEntity>
     {
-        public IEnumerable<MISAEntity> GetAll();
-        public MISAEntity GetById(Guid id);
-        public int Delete(Guid id);
-        public MISAEntity GetByCode(string Code);
-        public int Insert(MISAEntity entity);
-        public int Update(MISAEntity entity, Guid id);
-        public MISAEntity GetEntityByProperty(string propertyName, object propertyValue);
+        IEnumerable<MISAEntity> GetAll();
+        MISAEntity GetById(Guid id);
+        int Delete(Guid id);
+        MISAEntity GetByCode(string Code);
+        int Insert(MISAEntity entity);
+        int Update(MISAEntity entity);
+        MISAEntity GetEntityByProperty(MISAEntity entity, PropertyInfo property);
     }
 }

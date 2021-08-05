@@ -8,7 +8,12 @@ namespace MISA.Entity
 {
     public enum MISACode
     {
-        
 
+    }
+    public enum EntityState
+    {
+        AddNew = 1,
+        Update = 2,
+        Delete = 3
     }
 }

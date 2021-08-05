@@ -79,11 +79,20 @@ namespace MISA.ApplicationCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bạn đã thêm thành công đối tượng.
+        ///   Looks up a localized string similar to Bạn đã thêm thành công.
         /// </summary>
         public static string InsertSuccess {
             get {
                 return ResourceManager.GetString("InsertSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bạn đã sửa thành công.
+        /// </summary>
+        public static string UpdateSuccess {
+            get {
+                return ResourceManager.GetString("UpdateSuccess", resourceCulture);
             }
         }
         
@@ -120,6 +129,33 @@ namespace MISA.ApplicationCore.Properties {
         public static string ValidateError_EmployeeCode_Exist {
             get {
                 return ResourceManager.GetString("ValidateError_EmployeeCode_Exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} không được phép để trống.
+        /// </summary>
+        public static string ValidateError_Empty {
+            get {
+                return ResourceManager.GetString("ValidateError_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} đã tồn tại. Mời bạn nhập lại.
+        /// </summary>
+        public static string ValidateError_Exist {
+            get {
+                return ResourceManager.GetString("ValidateError_Exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} có chiều dài dữ liệu vượt qua Maxlength.
+        /// </summary>
+        public static string ValidateError_MaxLength {
+            get {
+                return ResourceManager.GetString("ValidateError_MaxLength", resourceCulture);
             }
         }
     }

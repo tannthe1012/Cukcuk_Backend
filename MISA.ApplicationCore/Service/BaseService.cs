@@ -3,21 +3,24 @@ using MISA.ApplicationCore.Interface;
 using MISA.Entity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Service
 {
-    public class BaseService<MISAEntity> : IBaseService<MISAEntity>
+    public class BaseService<MISAEntity> : IBaseService<MISAEntity> where MISAEntity:BaseEntity 
     {
         #region Field
         IBaseRepository<MISAEntity> _baseRepository;
+        public  ServiceResult _serviceResult;
         #endregion
         #region Constructor
         public BaseService(IBaseRepository<MISAEntity> baseRepository)
         {
             _baseRepository = baseRepository;
+            _serviceResult = new ServiceResult() { isValid = true };
         }
         #endregion
         #region Methods
@@ -49,25 +52,19 @@ namespace MISA.ApplicationCore.Service
         /// <returns>Số bản ghi thay đổi trong DB</returns>
         public virtual ServiceResult Insert(MISAEntity entity)
         {
-            var serviceResult = new ServiceResult();
+
+            entity.EntityState = EntityState.AddNew;
             // Thực hiện validate
             var isValidate = Validate(entity);
             if (isValidate == true)
             {
-                
+
                 var rowEntity = _baseRepository.Insert(entity);
-                if (rowEntity > 0)
-                {
-                    serviceResult.isValid = true;
-                    serviceResult.Data = rowEntity;
-                }
-                return serviceResult;
-            } else
-            {
-                serviceResult.isValid = false;
-                return serviceResult;
-            }
-            
+                _serviceResult.Data = rowEntity;
+                _serviceResult.UserMsg = Properties.Resources.InsertSuccess;         
+            } 
+            return _serviceResult;
+
         }
         /// <summary>
         /// Sửa đổi dữ liệu của đối tượng
@@ -75,10 +72,17 @@ namespace MISA.ApplicationCore.Service
         /// <param name="entity">Đối tượng cần sửa đổi</param>
         /// <param name="id">id của đối tượng</param>
         /// <returns>Số bản ghi thay đổi</returns>
-        public int Update(MISAEntity entity, Guid id)
+        public ServiceResult Update(MISAEntity entity)
         {
-            var rowEntity = _baseRepository.Update(entity, id);
-            return rowEntity;
+            entity.EntityState = EntityState.Update;
+            var isValidate = Validate(entity); 
+            if (isValidate == true)
+            {
+                var rowEntity = _baseRepository.Update(entity);
+                _serviceResult.Data = rowEntity;
+                _serviceResult.UserMsg = Properties.Resources.InsertSuccess;
+            }          
+            return _serviceResult;
         }
         /// <summary>
         /// hàm xóa theo id của đối tượng
@@ -103,6 +107,8 @@ namespace MISA.ApplicationCore.Service
             var properties = entity.GetType().GetProperties();
             foreach (var property in properties)
             {
+                DisplayNameAttribute dp = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).Cast<DisplayNameAttribute>().SingleOrDefault();
+                
                 // kiểm tra xem có attribute cần phải validate không
                 if (property.IsDefined(typeof(Required),false))
                 {
@@ -110,20 +116,56 @@ namespace MISA.ApplicationCore.Service
                     var propertyValue = property.GetValue(entity);
                     if (propertyValue == null)
                     {
+                        _serviceResult.UserMsg = string.Format(Properties.Resources.ValidateError_Empty, dp.DisplayName);
+                        _serviceResult.isValid = false;
                         isValidate = false;
+                     
                     }
                 }
                 if (property.IsDefined(typeof(CheckDuplicate), false))
                 {
                     //check trung dữ liệu
-                    var entityDuplicate = _baseRepository.GetEntityByProperty(property.Name, property.GetValue(entity));
+                    var entityDuplicate = _baseRepository.GetEntityByProperty(entity, property);
                     if (entityDuplicate!=null)
                     {
+                        _serviceResult.UserMsg = string.Format(Properties.Resources.ValidateError_Exist, dp.DisplayName);
+                        _serviceResult.isValid = false;
+                        isValidate = false;
+                       
+                    }
+                }
+                if (property.IsDefined(typeof(MaxLength), false))
+                {
+                    // Lấy độ dài đã khai báo
+                    var propertyValue = property.GetValue(entity);
+                    var attributeMaxlength = property.GetCustomAttributes(typeof(MaxLength), true)[0];
+                    var length = (attributeMaxlength as MaxLength).Value; // MAxlength(20,msg)
+                 
+                    if (propertyValue.ToString().Trim().Length > length)
+                    {
+                        _serviceResult.UserMsg = string.Format(Properties.Resources.ValidateError_MaxLength, dp.DisplayName);
+                        _serviceResult.isValid = false;
                         isValidate = false;
                     }
-                } 
+
+                }
+
+            }
+            if (isValidate == true)
+            {
+                isValidate = ValidateCustom(entity);
             }
             return isValidate;
+        }
+        /// <summary>
+        /// Hàm kiểm tra dữ liệu nghiệp vụ
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        protected virtual bool ValidateCustom(MISAEntity entity)
+        {
+            return true;
         }
         #endregion
     }

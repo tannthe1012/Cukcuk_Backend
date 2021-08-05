@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,17 +10,21 @@ namespace MISA.ApplicationCore.Entities
     /// phòng ban
     /// Created By: NTTan (24/7/2021)
     /// </summary>
-    public class Department
+    public class Department:BaseEntity
     {
         #region Properties
         /// <summary>
         /// Khóa chính
         /// </summary>
+        [PrimaryKey]
         public Guid DepartmentId { get; set; }
 
         /// <summary>
         /// Mã phòng ban
         /// </summary>
+        [Required]
+        [CheckDuplicate]
+        [DisplayName("Mã phòng ban")]
         public string DepartmentCode { get; set; }
 
         /// <summary>

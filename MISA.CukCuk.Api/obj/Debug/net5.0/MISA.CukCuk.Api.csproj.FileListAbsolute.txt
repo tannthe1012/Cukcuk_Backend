@@ -33,3 +33,7 @@ C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MIS
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.ApplicationCore.pdb
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Reponsitory.dll
 C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Reponsitory.pdb
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\CTY-MISA\MISA-backend\CukCuk\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

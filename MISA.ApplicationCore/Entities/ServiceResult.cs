@@ -9,7 +9,7 @@ namespace MISA.ApplicationCore.Entities
 {
     public class ServiceResult
     {
-        public Boolean isValid { get; set; }
+        public Boolean isValid { get; set; } = true;
         public object Data { get; set; }
         public string DevMsg { get; set; } = string.Empty;
         public string UserMsg { get; set; } = string.Empty;

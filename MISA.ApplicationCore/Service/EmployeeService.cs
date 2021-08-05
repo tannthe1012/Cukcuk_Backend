@@ -22,40 +22,18 @@ namespace MISA.ApplicationCore
         {
             _employeeRepository = employeeRepository;
         }
-        public IEnumerable<Employee> GetEmployeePaging(int limit, int offset)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
         #region Method
-        //public override ServiceResult Insert(Employee employee)
-        //{
-        //    var serviceResult = new ServiceResult();
-            
-        //    if (string.IsNullOrEmpty(employee.EmployeeCode))
-        //    {
-        //        serviceResult.isValid = false;
-        //        serviceResult.UserMsg = Properties.Resources.ValidateError_EmployeeCode_Empty;
-        //        return serviceResult;
-        //    }
-        //    //2.Mã nhân viên có trung hay không? không được phép trùng
-            
-        //    var res = _employeeRepository.GetByCode(employee.EmployeeCode);
-        //    if (res != null)
-        //    {
-               
-        //        serviceResult.UserMsg = Properties.Resources.ValidateError_EmployeeCode_Exist;
-        //        serviceResult.isValid = false;
-        //        return serviceResult;
-        //    }
-        //    //3.Email có đúng định dạng hay không
+        public object GetEmployeeFilterPaging(string employeeFilter, Guid? departmentId, Guid? positionId, int pageIndex, int pageSize)
+        {
+            return _employeeRepository.GetEmployeeFilterPaging(employeeFilter, departmentId, positionId, pageIndex, pageSize);
+        }
 
-        //    var rowAffects = _employeeRepository.Insert(employee);
-        //    serviceResult.isValid = true;
-        //    serviceResult.Data = rowAffects;
-        //    serviceResult.UserMsg = Properties.Resources.InsertSuccess;
-        //    return serviceResult;
-        //}
+        public string GetNewEmployeeCode()
+        {
+            return _employeeRepository.GetNewEmployeeCode();
+        }
+
         #endregion
     }
 }

@@ -124,7 +124,10 @@
     <value>Có lỗi xảy ra vui lòng liên hệ với MISA</value>
   </data>
   <data name="InsertSuccess" xml:space="preserve">
-    <value>Bạn đã thêm thành công đối tượng</value>
+    <value>Bạn đã thêm thành công</value>
+  </data>
+  <data name="UpdateSuccess" xml:space="preserve">
+    <value>Bạn đã sửa thành công</value>
   </data>
   <data name="ValidateError_DepartmentCode_Empty" xml:space="preserve">
     <value>Mã phòng ban không được phép để trống</value>
@@ -137,5 +140,14 @@
   </data>
   <data name="ValidateError_EmployeeCode_Exist" xml:space="preserve">
     <value>Mã nhân viên đã tồn tại. Mời bạn nhập lại</value>
+  </data>
+  <data name="ValidateError_Empty" xml:space="preserve">
+    <value>{0} không được phép để trống</value>
+  </data>
+  <data name="ValidateError_Exist" xml:space="preserve">
+    <value>{0} đã tồn tại. Mời bạn nhập lại</value>
+  </data>
+  <data name="ValidateError_MaxLength" xml:space="preserve">
+    <value>{0} có chiều dài dữ liệu vượt qua Maxlength</value>
   </data>
 </root>

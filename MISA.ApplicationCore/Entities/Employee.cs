@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace MISA.ApplicationCore.Entities
     /// Nhân viên
     /// </summary>
     /// Created By: NTTan (21/7/2021)
-    public class Employee
+    public class Employee : BaseEntity
     {
         #region Property
         /// <summary>
@@ -24,6 +25,8 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         [CheckDuplicate]
         [Required]
+        [DisplayName("Mã nhân viên")]
+        [MaxLength(20)]
         public string EmployeeCode { get; set; }
         /// <summary>
         /// Họ của nhân viên
@@ -48,6 +51,8 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Số điện thoại
         /// </summary>
+        [CheckDuplicate]
+        [DisplayName("Số điện thoại")]
         public string PhoneNumber { get; set; }
         /// <summary>
         /// Email

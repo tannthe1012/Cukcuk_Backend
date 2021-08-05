@@ -112,16 +112,36 @@ namespace MISA.CukCuk.Api.Controllers
         /// <param name="entity">Đối tượng đối tượng cần sửa</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Update(MISAEntity entity, Guid id)
+        public IActionResult Update(MISAEntity entity, string id)
         {
             try
             {
-                var rowEntity = _baseService.Update(entity, id);
+                var keyProperty = entity.GetType().GetProperty($"{typeof(MISAEntity).Name}Id");
+                if (keyProperty.PropertyType == typeof(Guid))
+                {
+                    keyProperty.SetValue(entity, Guid.Parse(id));
+                }
+                else if (keyProperty.PropertyType == typeof(int))
+                {
+                    keyProperty.SetValue(entity, int.Parse(id));
+                }
+                else
+                {
+                    keyProperty.SetValue(entity, id);
+                }
+
+                var serviceResult = _baseService.Update(entity);
                 //trả về kết quả
-                if (rowEntity > 0)
-                    return Ok(rowEntity);
+                if (serviceResult.isValid == false)
+                {
+                    return BadRequest(serviceResult);
+                }
+                if (serviceResult.isValid == true && (int)serviceResult.Data > 0)
+                    return StatusCode(201, serviceResult);
                 else
                     return NoContent();
+
+
             }
             catch (Exception e)
             {
@@ -142,10 +162,9 @@ namespace MISA.CukCuk.Api.Controllers
             try
             {
                 var rowEntity = _baseService.Delete(id);
-
                 if (rowEntity == 1)
                     return Ok();
-                return StatusCode(500);
+                return NoContent();
             }
             catch (Exception e)
             {

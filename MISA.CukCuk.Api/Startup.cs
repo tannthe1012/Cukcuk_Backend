@@ -32,9 +32,14 @@ namespace MISA.CukCuk.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(jsonOptions =>
+            {
+                jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
