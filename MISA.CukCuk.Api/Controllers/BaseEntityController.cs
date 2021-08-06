@@ -32,24 +32,14 @@ namespace MISA.CukCuk.Api.Controllers
         /// </summary>
         /// <returns>danh sách đối tượng</returns>
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            try
-            {
-                var entities = _baseService.GetAll();
-                //trả về kết quả
-                if (entities.Count() > 0)
-                    return Ok(entities);
-                else
-                    return NoContent();
-            }
-            catch (Exception e)
-            {
-                _serviceResult.MISACode = MISAConstants.MISAErrorException;
-                _serviceResult.UserMsg = ApplicationCore.Properties.Resources.Error_Exception;
-                _serviceResult.DevMsg = e.Message;
-                return StatusCode(500, _serviceResult);
-            }
+            var entities = await _baseService.GetAll();
+            //trả về kết quả
+            if (entities.Count() > 0)
+                return Ok(entities);
+            else
+                return NoContent();
         }
         /// <summary>
         /// Láy danh sách đối tượng theo id
@@ -57,25 +47,14 @@ namespace MISA.CukCuk.Api.Controllers
         /// <param name="entityId">id của đối tượng</param>
         /// <returns>đối tượng</returns>
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            try
-            {
-                var entity = _baseService.GetById(id);
-                //trả về kết quả
-                if (entity != null)
-                    return Ok(entity);
-                else
-                    return NoContent();
-            }
-            catch (Exception e)
-            {
-                _serviceResult.MISACode = MISAConstants.MISAErrorException;
-                _serviceResult.UserMsg = ApplicationCore.Properties.Resources.Error_Exception;
-                _serviceResult.DevMsg = e.Message;
-                return StatusCode(500, _serviceResult);
-            }
-
+            var entity = await _baseService.GetById(id);
+            //trả về kết quả
+            if (entity != null)
+                return Ok(entity);
+            else
+                return NoContent();
         }
         /// <summary>
         /// Thêm mới đối tượng
@@ -83,28 +62,18 @@ namespace MISA.CukCuk.Api.Controllers
         /// <param name="entity">một đối tượng entity </param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Insert(MISAEntity entity)
+        public async Task<IActionResult> Insert(MISAEntity entity)
         {
-            try
+            var serviceResult = await _baseService.Insert(entity);
+            //trả về kết quả
+            if (serviceResult.isValid == false)
             {
-                var serviceResult = _baseService.Insert(entity);
-                //trả về kết quả
-                if (serviceResult.isValid == false)
-                {
-                    return BadRequest(serviceResult);
-                }
-                if (serviceResult.isValid == true && (int)serviceResult.Data > 0)
-                    return StatusCode(201, serviceResult);
-                else
-                    return NoContent();
+                return BadRequest(serviceResult);
             }
-            catch (Exception e)
-            {
-                _serviceResult.MISACode = MISAConstants.MISAErrorException;
-                _serviceResult.UserMsg = ApplicationCore.Properties.Resources.Error_Exception;
-                _serviceResult.DevMsg = e.Message;
-                return StatusCode(500, _serviceResult);
-            }
+            if (serviceResult.isValid == true && (int)serviceResult.Data > 0)
+                return StatusCode(201, serviceResult);
+            else
+                return NoContent();
         }
         /// <summary>
         /// Sửa thông tin đối tượng
@@ -112,44 +81,31 @@ namespace MISA.CukCuk.Api.Controllers
         /// <param name="entity">Đối tượng đối tượng cần sửa</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Update(MISAEntity entity, string id)
+        public async Task<IActionResult> Update(MISAEntity entity, string id)
         {
-            try
+            var keyProperty = entity.GetType().GetProperty($"{typeof(MISAEntity).Name}Id");
+            if (keyProperty.PropertyType == typeof(Guid))
             {
-                var keyProperty = entity.GetType().GetProperty($"{typeof(MISAEntity).Name}Id");
-                if (keyProperty.PropertyType == typeof(Guid))
-                {
-                    keyProperty.SetValue(entity, Guid.Parse(id));
-                }
-                else if (keyProperty.PropertyType == typeof(int))
-                {
-                    keyProperty.SetValue(entity, int.Parse(id));
-                }
-                else
-                {
-                    keyProperty.SetValue(entity, id);
-                }
-
-                var serviceResult = _baseService.Update(entity);
-                //trả về kết quả
-                if (serviceResult.isValid == false)
-                {
-                    return BadRequest(serviceResult);
-                }
-                if (serviceResult.isValid == true && (int)serviceResult.Data > 0)
-                    return StatusCode(201, serviceResult);
-                else
-                    return NoContent();
-
-
+                keyProperty.SetValue(entity, Guid.Parse(id));
             }
-            catch (Exception e)
+            else if (keyProperty.PropertyType == typeof(int))
             {
-                _serviceResult.MISACode = MISAConstants.MISAErrorException;
-                _serviceResult.UserMsg = ApplicationCore.Properties.Resources.Error_Exception;
-                _serviceResult.DevMsg = e.Message;
-                return StatusCode(500, _serviceResult);
+                keyProperty.SetValue(entity, int.Parse(id));
             }
+            else
+            {
+                keyProperty.SetValue(entity, id);
+            }
+            var serviceResult = await _baseService.Update(entity);
+            //trả về kết quả
+            if (serviceResult.isValid == false)
+            {
+                return BadRequest(serviceResult);
+            }
+            if (serviceResult.isValid == true && (int)serviceResult.Data > 0)
+                return StatusCode(201, serviceResult);
+            else
+                return NoContent();
         }
         /// <summary>
         /// Xóa đối tượng theo Id
@@ -157,22 +113,12 @@ namespace MISA.CukCuk.Api.Controllers
         /// <param name="entityId">Id của đối tượng</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            try
-            {
-                var rowEntity = _baseService.Delete(id);
-                if (rowEntity == 1)
-                    return Ok();
-                return NoContent();
-            }
-            catch (Exception e)
-            {
-                _serviceResult.MISACode = MISAConstants.MISAErrorException;
-                _serviceResult.UserMsg = ApplicationCore.Properties.Resources.Error_Exception;
-                _serviceResult.DevMsg = e.Message;
-                return StatusCode(500, _serviceResult);
-            }
+            var rowEntity = await _baseService.Delete(id);
+            if (rowEntity == 1)
+                return Ok();
+            return NoContent();
         }
         #endregion
     }

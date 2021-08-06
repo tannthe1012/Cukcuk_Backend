@@ -29,9 +29,9 @@ namespace MISA.ApplicationCore.Service
         /// </summary>
         /// <returns></returns>
         /// Created By: NTTan(26/7/2021)
-        public IEnumerable<MISAEntity> GetAll()
+        public async Task<IEnumerable<MISAEntity>> GetAll()
         {
-            var entities = _baseRepository.GetAll();
+            var entities = await _baseRepository.GetAll();
             return entities;
         }
         /// <summary>
@@ -40,9 +40,9 @@ namespace MISA.ApplicationCore.Service
         /// <param name="id">id của đối tượng</param>
         /// <returns>Số cột bị xóa</returns>
         /// Created By: NTTan (26/7/2021)
-        public MISAEntity GetById(Guid id)
+        public async Task<MISAEntity> GetById(Guid id)
         {
-            var entity = _baseRepository.GetById(id);
+            var entity = await _baseRepository.GetById(id);
             return entity;
         }
         /// <summary>
@@ -50,16 +50,16 @@ namespace MISA.ApplicationCore.Service
         /// </summary>
         /// <param name="entity">Đối tượng cần thêm mới</param>
         /// <returns>Số bản ghi thay đổi trong DB</returns>
-        public virtual ServiceResult Insert(MISAEntity entity)
+        public virtual async Task<ServiceResult> Insert(MISAEntity entity)
         {
 
             entity.EntityState = EntityState.AddNew;
             // Thực hiện validate
-            var isValidate = Validate(entity);
+            var isValidate =  Validate(entity);
             if (isValidate == true)
             {
 
-                var rowEntity = _baseRepository.Insert(entity);
+                var rowEntity = await _baseRepository.Insert(entity);
                 _serviceResult.Data = rowEntity;
                 _serviceResult.UserMsg = Properties.Resources.InsertSuccess;         
             } 
@@ -72,13 +72,13 @@ namespace MISA.ApplicationCore.Service
         /// <param name="entity">Đối tượng cần sửa đổi</param>
         /// <param name="id">id của đối tượng</param>
         /// <returns>Số bản ghi thay đổi</returns>
-        public ServiceResult Update(MISAEntity entity)
+        public async Task<ServiceResult> Update(MISAEntity entity)
         {
             entity.EntityState = EntityState.Update;
             var isValidate = Validate(entity); 
             if (isValidate == true)
             {
-                var rowEntity = _baseRepository.Update(entity);
+                var rowEntity = await _baseRepository.Update(entity);
                 _serviceResult.Data = rowEntity;
                 _serviceResult.UserMsg = Properties.Resources.InsertSuccess;
             }          
@@ -90,9 +90,9 @@ namespace MISA.ApplicationCore.Service
         /// <param name="id">id của đối tượng</param>
         /// <returns>Số cột bị xóa</returns>
         /// Created By: NTTan (26/7/2021)
-        public int Delete(Guid id)
+        public async Task<int> Delete(Guid id)
         {
-            var rowEntity = _baseRepository.Delete(id);
+            var rowEntity = await _baseRepository.Delete(id);
             return rowEntity;
         }
         /// <summary>

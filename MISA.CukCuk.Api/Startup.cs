@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using MISA.ApplicationCore;
 using MISA.ApplicationCore.Interface;
 using MISA.ApplicationCore.Service;
+using MISA.CukCuk.Api.Middlewares;
 using MISA.Infarstructure;
 using MISA.Reponsitory;
 using System;
@@ -31,7 +32,7 @@ namespace MISA.CukCuk.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors();
             services.AddControllers().AddJsonOptions(jsonOptions =>
             {
                 jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -61,9 +62,9 @@ namespace MISA.CukCuk.Api
             }
 
             app.UseHttpsRedirection();
-
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseRouting();
-
+            app.UseCors(option => option.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

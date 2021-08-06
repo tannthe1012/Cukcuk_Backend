@@ -18,7 +18,16 @@ namespace MISA.Infarstructure
         public EmployeeRepository(IConfiguration configuration) : base(configuration)
         {
         }
-
+        /// <summary>
+        /// Xử lí Filter and pagination
+        /// </summary>
+        /// <param name="employeeFilter">Số điện thoại, mã nhân viên , họ và tên</param>
+        /// <param name="departmentId">Mã phòng ban</param>
+        /// <param name="positionId">mã vị trí</param>
+        /// <param name="pageIndex">Page số bao nhiêu</param>
+        /// <param name="pageSize">Bao nhiêu bản ghi trong một trang</param>
+        /// <returns>List các bản ghi</returns>
+        /// Created By: NTTan(2/8/2021)
         public object GetEmployeeFilterPaging(string employeeFilter, Guid? departmentId, Guid? positionId, int pageIndex, int pageSize)
         {
             DynamicParameters parameters = new DynamicParameters();
@@ -40,6 +49,11 @@ namespace MISA.Infarstructure
             };
             return result;
         }
+        /// <summary>
+        /// Hàm tự render Employeecode mới
+        /// </summary>
+        /// <returns>Trả về EmployeeCode chưa có trong DB</returns>
+        /// Created By: NTTan (3/8/2021)
         public string GetNewEmployeeCode()
         {
             var result = _dbConnection.QueryFirstOrDefault<string>("Proc_GetNewEmployeeCode", commandType: CommandType.StoredProcedure);

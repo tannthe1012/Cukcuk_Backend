@@ -9,10 +9,10 @@ namespace MISA.ApplicationCore.Interface
 {
     public interface IBaseService<MISAEntity>
     {
-         IEnumerable<MISAEntity> GetAll();
-         MISAEntity GetById(Guid id);
-         int Delete(Guid id);
-         ServiceResult Insert(MISAEntity entity);
-         ServiceResult Update(MISAEntity entity);
+         Task<IEnumerable<MISAEntity>> GetAll();
+         Task<MISAEntity> GetById(Guid id);
+         Task<int> Delete(Guid id);
+         Task<ServiceResult> Insert(MISAEntity entity);
+         Task<ServiceResult> Update(MISAEntity entity);
     }
 }

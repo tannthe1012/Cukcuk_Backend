@@ -16,10 +16,10 @@ using MISA.ApplicationCore.Constants;
 
 namespace MISA.CukCuk.Api.Controllers
 {
-     /// <summary>
-     /// Api Danh sách nhân viên
-     /// Created By: NTTan (24/7/2021)
-     /// </summary>
+    /// <summary>
+    /// Api Danh sách nhân viên
+    /// Created By: NTTan (24/7/2021)
+    /// </summary>
     [Route("api/v1/Employees")]
     [ApiController]
     public class EmployeeController : BaseEntityController<Employee>
@@ -45,41 +45,19 @@ namespace MISA.CukCuk.Api.Controllers
         [HttpGet("filter")]
         public IActionResult GetEmployeeFilterPaging(string employeeFilter, Guid? departmentId, Guid? positionId, int pageIndex, int pageSize)
         {
-            try
-            {
-                var result = _employeeService.GetEmployeeFilterPaging(employeeFilter, departmentId, positionId, pageIndex, pageSize);
-                if (result!=null)
-                    return Ok(result);
-                else
-                    return NoContent();
-            }
-            catch (Exception e)
-            {
-                _serviceResult.MISACode = MISAConstants.MISAErrorException;
-                _serviceResult.UserMsg = ApplicationCore.Properties.Resources.Error_Exception;
-                _serviceResult.DevMsg = e.Message;
-                return StatusCode(500, _serviceResult);
-            }
-            
+            var result = _employeeService.GetEmployeeFilterPaging(employeeFilter, departmentId, positionId, pageIndex, pageSize);
+            if (result != null)
+                return Ok(result);
+            else
+                return NoContent();
         }
         [HttpGet("NewEmployeeCode")]
         public IActionResult GetNewEmployeeCode()
         {
-            try
-            {
-                var result = _employeeService.GetNewEmployeeCode();
-                if (result != null)
-                    return Ok(result);
-                return NoContent();
-
-            }
-            catch (Exception e)
-            {
-                _serviceResult.MISACode = MISAConstants.MISAErrorException;
-                _serviceResult.UserMsg = ApplicationCore.Properties.Resources.Error_Exception;
-                _serviceResult.DevMsg = e.Message;
-                return StatusCode(500, _serviceResult);
-            }
+            var result = _employeeService.GetNewEmployeeCode();
+            if (result != null)
+                return Ok(result);
+            return NoContent();
         }
         #endregion
     }

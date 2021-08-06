@@ -42,10 +42,11 @@ namespace MISA.Infarstructure
         /// </summary>
         /// <returns></returns>
         /// Created By: NTTan(26/7/2021)
-        public IEnumerable<MISAEntity> GetAll()
+        public async Task<IEnumerable<MISAEntity>> GetAll()
         {
-            var entities = _dbConnection.Query<MISAEntity>($"Proc_Get{className}s", commandType: CommandType.StoredProcedure);
-            return entities;
+            _dbConnection.Open();
+            var entities = await _dbConnection.QueryAsync<MISAEntity>($"Proc_Get{className}s", commandType: CommandType.StoredProcedure);
+            return  entities;
         }
         /// <summary>
         /// Hàm lấy đối tượng theo id
@@ -53,34 +54,14 @@ namespace MISA.Infarstructure
         /// <param name="id">id của đối tượng</param>
         /// <returns>Đối tượng với id tương ứng</returns>
         /// Created By: NTTan (26/7/2021)
-        public MISAEntity GetById(Guid id)
+        public async Task<MISAEntity> GetById(Guid id)
         {
             var className = typeof(MISAEntity).Name;
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add($"@{className}Id", id);
             var sqlCommand = $"SELECT * FROM {className} WHERE {className}Id = @{className}Id";
-            var entity = _dbConnection.QueryFirstOrDefault<MISAEntity>(sqlCommand, param: parameters);
+            var entity = await _dbConnection.QueryFirstOrDefaultAsync<MISAEntity>(sqlCommand, param: parameters);
             return entity;
-        }
-        /// <summary>
-        /// hàm xóa theo id của đối tượng
-        /// </summary>
-        /// <param name="id">id của đối tượng</param>
-        /// <returns>Số cột bị xóa</returns>
-        /// Created By: NTTan (26/7/2021)
-        public int Delete(Guid id)
-        {
-            var rowEmployee = 0;
-            _dbConnection.Open();
-            using (var transaction = _dbConnection.BeginTransaction())
-            {
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add($"@{className}Id", id);
-                var sqlCommand = $"DELETE FROM {className} WHERE {className}Id = @{className}Id";
-                rowEmployee = _dbConnection.Execute(sqlCommand, param: parameters, transaction);
-                transaction.Commit();
-            }
-            return rowEmployee;
         }
         /// <summary>
         /// Hàm kiếm tra mã đối tượng đã tồn tại hay chưa
@@ -88,13 +69,13 @@ namespace MISA.Infarstructure
         /// <param name="employeeCode"></param>
         /// <returns>true mã đã tồn tại</returns>
         /// Created By: NTTan (26/7/2021)
-        public MISAEntity GetByCode(string ObjCode)
+        public async Task<MISAEntity> GetByCode(string ObjCode)
         {
             var className = typeof(MISAEntity).Name;
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add($"@{className}Code", ObjCode);
             var sqlCommand = $"SELECT * FROM {className} WHERE {className}Code = @{className}Code";
-            var entity = _dbConnection.QueryFirstOrDefault<MISAEntity>(sqlCommand, param: parameters);
+            var entity = await _dbConnection.QueryFirstOrDefaultAsync<MISAEntity>(sqlCommand, param: parameters);
             return entity;
         }
         /// <summary>
@@ -102,16 +83,23 @@ namespace MISA.Infarstructure
         /// </summary>
         /// <param name="entity">Đối tượng cần thêm mới</param>
         /// <returns>Số bản ghi thay đổi trong DB</returns>
-        public int Insert(MISAEntity entity)
+        public async Task<int> Insert(MISAEntity entity)
         {
             var rowEntity = 0;
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
             {
-                var className = typeof(MISAEntity).Name;
-                var parameters = MappingDbType(entity);
-                rowEntity = _dbConnection.Execute($"Proc_Insert{className}", parameters, commandType: CommandType.StoredProcedure);
-                transaction.Commit();
+                try
+                {
+                    var className = typeof(MISAEntity).Name;
+                    var parameters = MappingDbType(entity);
+                    rowEntity = await _dbConnection.ExecuteAsync($"Proc_Insert{className}", parameters, commandType: CommandType.StoredProcedure);
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();                   
+                }
             }
             return rowEntity;
         }
@@ -121,18 +109,52 @@ namespace MISA.Infarstructure
         /// <param name="entity">Đối tượng cần sửa đổi</param>
         /// <param name="id">id của đối tượng</param>
         /// <returns>Số bản ghi thay đổi</returns>
-        public int Update(MISAEntity entity)
+        public async Task<int> Update(MISAEntity entity)
         {
             var rowEntity = 0;
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
             {
-                var className = typeof(MISAEntity).Name;
-                var parameters = MappingDbType(entity);
-                rowEntity = _dbConnection.Execute($"Proc_Update{className}", parameters, commandType: CommandType.StoredProcedure);
-                transaction.Commit();
+                try
+                {
+                    var className = typeof(MISAEntity).Name;
+                    var parameters = MappingDbType(entity);
+                    rowEntity = await _dbConnection.ExecuteAsync($"Proc_Update{className}", parameters, commandType: CommandType.StoredProcedure);
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
             }
             return rowEntity;
+        }
+        /// <summary>
+        /// hàm xóa theo id của đối tượng
+        /// </summary>
+        /// <param name="id">id của đối tượng</param>
+        /// <returns>Số cột bị xóa</returns>
+        /// Created By: NTTan (26/7/2021)
+        public async Task<int> Delete(Guid id)
+        {
+            var rowEmployee = 0;
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add($"@{className}Id", id);
+                    var sqlCommand = $"DELETE FROM {className} WHERE {className}Id = @{className}Id";
+                    rowEmployee = await _dbConnection.ExecuteAsync(sqlCommand, param: parameters, transaction);
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+            }
+            return rowEmployee;
         }
         /// <summary>
         /// Hàm để Map các thuộc tính
@@ -166,7 +188,7 @@ namespace MISA.Infarstructure
         /// <param name="entity">Đối tượng cần kiểm tr</param>
         /// <param name="property">property cần check</param>
         /// <returns></returns>
-        public MISAEntity GetEntityByProperty(MISAEntity entity, PropertyInfo property)
+        public async Task<MISAEntity> GetEntityByProperty(MISAEntity entity, PropertyInfo property)
         {
             var propertyName = property.Name;
             var query = string.Empty;
@@ -184,10 +206,12 @@ namespace MISA.Infarstructure
             {
                 return null;
             }
-            var entityResult = _dbConnection.QueryFirstOrDefault<MISAEntity>(query, commandType: CommandType.Text);
+            var entityResult = await _dbConnection.QueryFirstOrDefaultAsync<MISAEntity>(query, commandType: CommandType.Text);
             return entityResult;
         }
-
+        /// <summary>
+        /// Hàm xóa đối tượng DbConnection để đỡ tốn tài nguyên
+        /// </summary>
         public void Dispose()
         {
             if (_dbConnection.State == ConnectionState.Open)
